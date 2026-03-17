@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sahil Kumar — Game Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#07090f;
+  --surface:#0d1117;
+  --card:#111820;
+  --card2:#0f161e;
+  --border:#1c2a38;
+  --border2:#243345;
+  --cyan:#00d4ff;
+  --green:#39e07a;
+  --amber:#f5a623;
+  --red:#ff4f6a;
+  --text:#c4d4e3;
+  --muted:#4e6a82;
+  --heading:#e8f2fb;
+  --white:#ffffff;
+}
+
+html{scroll-behavior:smooth}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'DM Sans',sans-serif;
+  font-size:14px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+/* ── GRID BG ── */
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background-image:
+    linear-gradient(rgba(0,212,255,0.024) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,212,255,0.024) 1px,transparent 1px);
+  background-size:48px 48px;
+  pointer-events:none;z-index:0;
+}
+
+.wrap{
+  position:relative;z-index:1;
+  max-width:960px;
+  margin:0 auto;
+  padding:52px 28px 100px;
+}
+
+/* ══════════════════════════════
+   HEADER
+══════════════════════════════ */
+header{
+  background:var(--surface);
+  border:1px solid var(--border2);
+  border-top:3px solid var(--cyan);
+  padding:44px 48px 36px;
+  margin-bottom:28px;
+  position:relative;
+  overflow:hidden;
+}
+
+header::after{
+  content:'';
+  position:absolute;
+  top:-60px;right:-60px;
+  width:220px;height:220px;
+  background:radial-gradient(circle,rgba(0,212,255,0.07) 0%,transparent 70%);
+  pointer-events:none;
+}
+
+.hd-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  flex-wrap:wrap;
+  gap:20px;
+}
+
+.hd-name h1{
+  font-family:'Orbitron',sans-serif;
+  font-size:clamp(30px,5vw,46px);
+  font-weight:900;
+  color:var(--heading);
+  letter-spacing:0.02em;
+  line-height:1.05;
+}
+
+.hd-name h1 em{
+  font-style:normal;
+  color:var(--cyan);
+}
+
+.hd-name .tagline{
+  margin-top:10px;
+  font-family:'Orbitron',sans-serif;
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:0.28em;
+  text-transform:uppercase;
+  color:var(--green);
+  border:1px solid var(--green);
+  display:inline-block;
+  padding:4px 14px;
+}
+
+.hd-contact{
+  text-align:right;
+  font-size:12px;
+  color:var(--muted);
+  line-height:2.1;
+}
+.hd-contact a{color:var(--cyan);text-decoration:none}
+.hd-contact a:hover{color:var(--green)}
+.hd-contact .lbl{margin-right:6px;color:var(--border2)}
+
+.hd-summary{
+  margin-top:24px;
+  padding-top:20px;
+  border-top:1px solid var(--border);
+  font-size:13.5px;
+  font-weight:300;
+  color:var(--text);
+  line-height:1.8;
+  max-width:680px;
+}
+
+/* ══════════════════════════════
+   STATS
+══════════════════════════════ */
+.stats{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:10px;
+  margin-bottom:28px;
+}
+
+.stat{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-top:2px solid var(--cyan);
+  padding:18px 12px 14px;
+  text-align:center;
+  transition:border-color .2s,box-shadow .2s;
+}
+
+.stat:hover{border-color:var(--cyan);box-shadow:0 0 24px rgba(0,212,255,.12)}
+.stat:nth-child(2){border-top-color:var(--green)}
+.stat:nth-child(2):hover{border-color:var(--green);box-shadow:0 0 24px rgba(57,224,122,.12)}
+.stat:nth-child(3){border-top-color:var(--amber)}
+.stat:nth-child(3):hover{border-color:var(--amber)}
+.stat:nth-child(4){border-top-color:var(--red)}
+.stat:nth-child(5){border-top-color:#9b6fff}
+
+.stat-n{
+  font-family:'Orbitron',sans-serif;
+  font-size:26px;
+  font-weight:900;
+  color:var(--cyan);
+  display:block;
+}
+
+.stat:nth-child(2) .stat-n{color:var(--green)}
+.stat:nth-child(3) .stat-n{color:var(--amber)}
+.stat:nth-child(4) .stat-n{color:var(--red)}
+.stat:nth-child(5) .stat-n{color:#9b6fff}
+
+.stat-l{
+  font-size:9px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-top:4px;
+}
+
+/* ══════════════════════════════
+   LAYOUT COLUMNS
+══════════════════════════════ */
+.columns{
+  display:grid;
+  grid-template-columns:1fr 260px;
+  gap:16px;
+  align-items:start;
+}
+
+/* ══════════════════════════════
+   SECTION TITLE
+══════════════════════════════ */
+.sec-title{
+  font-family:'Orbitron',sans-serif;
+  font-size:9px;
+  font-weight:700;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  color:var(--cyan);
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:16px;
+}
+
+.sec-title::after{
+  content:'';
+  flex:1;height:1px;
+  background:linear-gradient(90deg,var(--border2),transparent);
+}
+
+/* ══════════════════════════════
+   EXPERIENCE CARDS
+══════════════════════════════ */
+.section{margin-bottom:22px}
+
+.exp-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-left:3px solid var(--cyan);
+  margin-bottom:12px;
+  transition:border-color .2s,box-shadow .2s;
+}
+
+.exp-card:hover{border-left-color:var(--cyan);box-shadow:0 0 28px rgba(0,212,255,.09)}
+.exp-card.green{border-left-color:var(--green)}
+.exp-card.green:hover{box-shadow:0 0 28px rgba(57,224,122,.09)}
+.exp-card.amber{border-left-color:var(--amber)}
+.exp-card.amber:hover{box-shadow:0 0 28px rgba(245,166,35,.09)}
+
+.exp-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:10px;
+  padding:18px 20px 12px 20px;
+  border-bottom:1px solid var(--border);
+  flex-wrap:wrap;
+}
+
+.exp-t{
+  font-family:'Orbitron',sans-serif;
+  font-size:13px;
+  font-weight:700;
+  color:var(--heading);
+  letter-spacing:.03em;
+}
+
+.exp-co{
+  font-size:11.5px;
+  color:var(--muted);
+  margin-top:3px;
+}
+
+.exp-badge{
+  font-family:'Orbitron',sans-serif;
+  font-size:9px;
+  font-weight:700;
+  letter-spacing:.16em;
+  color:var(--green);
+  border:1px solid var(--green);
+  padding:3px 9px;
+  white-space:nowrap;
+  flex-shrink:0;
+}
+
+.exp-card.amber .exp-badge{color:var(--amber);border-color:var(--amber)}
+.exp-card.muted-b .exp-badge{color:var(--muted);border-color:var(--border2)}
+
+.exp-body{padding:14px 20px 18px 20px}
+
+.exp-body>ul{list-style:none;margin-bottom:12px}
+.exp-body li{
+  position:relative;padding-left:16px;
+  font-size:12.5px;font-weight:300;
+  color:var(--text);margin-bottom:5px;
+  line-height:1.55;
+}
+.exp-body li::before{content:'▸';position:absolute;left:0;color:var(--cyan);font-size:10px;top:2px}
+.exp-card.green .exp-body li::before{color:var(--green)}
+.exp-card.amber .exp-body li::before{color:var(--amber)}
+
+/* ── PROJECT GRID ── */
+.proj-lbl{
+  font-family:'Orbitron',sans-serif;
+  font-size:8.5px;
+  font-weight:700;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--green);
+  margin:10px 0 8px;
+}
+
+.proj-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+.proj-card{
+  background:var(--card2);
+  border:1px solid var(--border);
+  border-left:2px solid var(--green);
+  padding:10px 13px;
+  transition:border-color .2s;
+}
+
+.proj-card:hover{border-left-color:var(--cyan)}
+
+.proj-name{
+  font-family:'Orbitron',sans-serif;
+  font-size:10px;
+  font-weight:700;
+  color:var(--green);
+  letter-spacing:.04em;
+  margin-bottom:4px;
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:5px;
+}
+
+.etag{
+  font-size:7.5px;
+  font-weight:600;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--muted);
+  background:var(--border);
+  padding:1px 5px;
+  border-radius:2px;
+}
+
+.proj-card ul{list-style:none}
+.proj-card li{
+  position:relative;padding-left:12px;
+  font-size:11px;font-weight:300;
+  color:var(--muted);margin-bottom:2px;
+  line-height:1.45;
+}
+.proj-card li::before{content:'·';position:absolute;left:2px;color:var(--green);font-size:16px;line-height:.85;top:1px}
+
+.proj-card.full{grid-column:span 2}
+
+/* ══════════════════════════════
+   SIDEBAR CARDS
+══════════════════════════════ */
+.side-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-top:2px solid var(--cyan);
+  padding:18px 20px;
+  margin-bottom:12px;
+}
+
+.side-card.green{border-top-color:var(--green)}
+.side-card.amber{border-top-color:var(--amber)}
+
+/* ── SKILL DOTS ── */
+.skill-item{margin-bottom:10px}
+.skill-row{
+  display:flex;justify-content:space-between;
+  align-items:center;margin-bottom:4px;
+}
+.skill-name{font-size:11.5px;color:var(--text);font-weight:400}
+.skill-lvl{
+  font-size:8.5px;font-weight:500;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted);
+}
+.dots{display:flex;gap:3px}
+.d{width:8px;height:8px;border-radius:50%;background:var(--border2)}
+.d.on{background:var(--cyan)}
+.side-card.green .d.on{background:var(--green)}
+.side-card.amber .d.on{background:var(--amber)}
+
+/* ── CORE SKILLS TAGS ── */
+.tag-cloud{display:flex;flex-wrap:wrap;gap:5px}
+.tag{
+  font-size:10.5px;font-weight:400;
+  color:var(--text);
+  background:rgba(0,212,255,.06);
+  border:1px solid rgba(0,212,255,.18);
+  padding:3px 9px;
+  transition:background .2s,color .2s,border-color .2s;
+}
+.tag:hover{background:rgba(0,212,255,.14);color:var(--cyan);border-color:var(--cyan)}
+
+/* ── EDUCATION ── */
+.edu-box{
+  background:var(--surface);
+  border:1px solid var(--border);
+  padding:16px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-bottom:12px;
+}
+.edu-deg{
+  font-family:'Orbitron',sans-serif;
+  font-size:11.5px;
+  font-weight:700;
+  color:var(--heading);
+}
+.edu-sub{font-size:11px;color:var(--muted);margin-top:3px;font-weight:300}
+.edu-bdg{
+  font-family:'Orbitron',sans-serif;
+  font-size:8.5px;
+  font-weight:700;
+  letter-spacing:.2em;
+  color:var(--green);
+  border:1px solid var(--green);
+  padding:4px 10px;
+  white-space:nowrap;
+}
+
+/* ── LANG BARS ── */
+.lang-item{margin-bottom:12px}
+.lang-row{
+  display:flex;justify-content:space-between;
+  margin-bottom:5px;
+  font-size:11.5px;color:var(--text);
+}
+.lang-lv{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);align-self:center}
+.lang-bar{height:2px;background:var(--border2)}
+.lang-fill{height:100%;background:linear-gradient(90deg,var(--cyan),var(--green))}
+
+/* ── ADDITIONAL ── */
+.add-list{list-style:none}
+.add-list li{
+  position:relative;padding-left:16px;
+  font-size:12px;font-weight:300;color:var(--text);
+  margin-bottom:7px;line-height:1.6;
+}
+.add-list li::before{content:'▸';position:absolute;left:0;color:var(--cyan);font-size:9px;top:3px}
+
+/* ══════════════════════════════
+   FOOTER
+══════════════════════════════ */
+footer{
+  margin-top:48px;
+  padding-top:20px;
+  border-top:1px solid var(--border);
+  text-align:center;
+  font-size:11px;
+  color:var(--muted);
+  letter-spacing:.1em;
+}
+footer em{color:var(--cyan);font-style:normal}
+
+/* ══════════════════════════════
+   ANIMATIONS
+══════════════════════════════ */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(18px)}
+  to{opacity:1;transform:translateY(0)}
+}
+header{animation:fadeUp .5s ease both}
+.stats{animation:fadeUp .5s .08s ease both}
+.columns{animation:fadeUp .5s .15s ease both}
+
+@media(max-width:700px){
+  .columns{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(3,1fr)}
+  .proj-grid{grid-template-columns:1fr}
+  .proj-card.full{grid-column:span 1}
+  header{padding:28px 22px 24px}
+  .hd-contact{text-align:left}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ══ HEADER ══ -->
+<header>
+  <div class="hd-top">
+    <div class="hd-name">
+      <h1>SAHIL <em>KUMAR</em></h1>
+      <div class="tagline">// Game Developer &amp; Interactive Experience Engineer</div>
+    </div>
+    <div class="hd-contact">
+      <div><span class="lbl">📍</span>India</div>
+      <div><span class="lbl">📧</span><a href="mailto:sahilmaravi123@gmail.com">sahilmaravi123@gmail.com</a></div>
+      <div><span class="lbl">📱</span><a href="tel:+917539902010">+91-7539902010</a></div>
+    </div>
+  </div>
+  <p class="hd-summary">
+    Passionate Game Developer with <strong>5+ years</strong> of hands-on experience building 2D/3D games, interactive simulations, and cross-platform mobile applications. Proficient in Unity (Advanced) and Unreal Engine (Intermediate), with a strong grasp of game physics, multiplayer networking, AI systems, and mobile-first optimization. Dedicated to crafting polished, immersive player experiences that balance performance with creative vision.
+  </p>
+</header>
+
+<!-- ══ STATS ══ -->
+<div class="stats">
+  <div class="stat"><span class="stat-n">5+</span><div class="stat-l">Years Exp.</div></div>
+  <div class="stat"><span class="stat-n">12+</span><div class="stat-l">Games Built</div></div>
+  <div class="stat"><span class="stat-n">2</span><div class="stat-l">Engines</div></div>
+  <div class="stat"><span class="stat-n">4</span><div class="stat-l">Languages</div></div>
+  <div class="stat"><span class="stat-n">3</span><div class="stat-l">Platforms</div></div>
+</div>
+
+<!-- ══ COLUMNS ══ -->
+<div class="columns">
+
+  <!-- ── MAIN COLUMN ── -->
+  <div>
+
+    <!-- EXPERIENCE -->
+    <div class="section">
+      <div class="sec-title">Professional Experience</div>
+
+      <!-- Unity Dev -->
+      <div class="exp-card">
+        <div class="exp-head">
+          <div>
+            <div class="exp-t">Unity Game Developer</div>
+            <div class="exp-co">Freelance / Independent Projects</div>
+          </div>
+          <div class="exp-badge">2023 — PRESENT</div>
+        </div>
+        <div class="exp-body">
+          <ul>
+            <li>Architected and shipped multiple 2D and 3D games across mobile and PC platforms from concept to release.</li>
+            <li>Designed modular gameplay frameworks covering mechanics, UI state machines, and scene management.</li>
+            <li>Integrated Admob, Unity Ads and IAP monetization pipelines, increasing revenue potential per title.</li>
+            <li>Profiled and optimized draw calls, memory allocation and physics simulations for 60fps mobile targets.</li>
+            <li>Built custom Editor tools to accelerate level design and asset pipeline workflows.</li>
+          </ul>
+
+          <div class="proj-lbl">// Key Projects</div>
+          <div class="proj-grid">
+
+            <div class="proj-card">
+              <div class="proj-name">Open World Survival RPG <span class="etag">UNITY · C#</span></div>
+              <ul>
+                <li>Procedural terrain generation with biome-based seeding</li>
+                <li>Full inventory, crafting table &amp; equipment durability systems</li>
+                <li>Behaviour Tree AI enemies with patrol, chase &amp; attack states</li>
+                <li>Dynamic day-night cycle with weather &amp; ambient lighting</li>
+              </ul>
+            </div>
+
+            <div class="proj-card">
+              <div class="proj-name">Multiplayer Racing Game <span class="etag">PHOTON · UNITY</span></div>
+              <ul>
+                <li>Real-time PvP via Photon PUN2 with lobby matchmaking</li>
+                <li>Custom WheelCollider vehicle physics &amp; drift mechanics</li>
+                <li>Lap timer, leaderboard &amp; race position HUD system</li>
+                <li>Scalable track editor using bezier spline tools</li>
+              </ul>
+            </div>
+
+            <div class="proj-card">
+              <div class="proj-name">3D Tower Defense Strategy <span class="etag">UNITY · C#</span></div>
+              <ul>
+                <li>A* pathfinding with dynamic obstacle recalculation</li>
+                <li>12 unique tower types with upgrade tree system</li>
+                <li>Wave manager with 30+ enemy variants and boss fights</li>
+                <li>Optimized with object pooling for 300+ simultaneous entities</li>
+              </ul>
+            </div>
+
+            <div class="proj-card">
+              <div class="proj-name">Hyper-Casual Mobile Suite <span class="etag">UNITY · MOBILE</span></div>
+              <ul>
+                <li>Stack Jump, Knife Hit, Helix Clone, Ball Maze &amp; 3+ others</li>
+                <li>Avg. session length optimized to 4–6 min via playtesting</li>
+                <li>AdMob interstitials, rewarded ads &amp; in-app purchase flow</li>
+              </ul>
+            </div>
+
+            <div class="proj-card full">
+              <div class="proj-name">2D Platformer Metroidvania <span class="etag">UNITY · CINEMACHINE</span></div>
+              <ul>
+                <li>Responsive character controller with coyote time, wall jump &amp; dash</li>
+                <li>Interconnected map with ability-gated zone unlocks and backtracking</li>
+                <li>Custom dialogue system with branching narrative &amp; localization support</li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Unreal Dev -->
+      <div class="exp-card green">
+        <div class="exp-head">
+          <div>
+            <div class="exp-t">Unreal Engine Developer</div>
+            <div class="exp-co">Self-Directed / Practice Projects</div>
+          </div>
+          <div class="exp-badge">2022 — 2023</div>
+        </div>
+        <div class="exp-body">
+          <ul>
+            <li>Built gameplay systems in both Blueprint visual scripting and native C++ using Unreal's core API.</li>
+            <li>Designed photorealistic environments using Lumen GI, Nanite geometry and HDRI sky lighting.</li>
+            <li>Explored UE5 GameplayAbilitySystem (GAS) for structured ability and attribute management.</li>
+            <li>Produced cinematic sequences using Sequencer and post-processing stacks for visual storytelling.</li>
+          </ul>
+
+          <div class="proj-lbl">// Key Projects</div>
+          <div class="proj-grid">
+
+            <div class="proj-card">
+              <div class="proj-name">First-Person Shooter Prototype <span class="etag">UE5 · C++</span></div>
+              <ul>
+                <li>Hitscan &amp; projectile shooting with recoil patterns</li>
+                <li>AI enemy using EQS environment queries &amp; BT</li>
+                <li>Full HUD: health, ammo, minimap &amp; kill feed</li>
+              </ul>
+            </div>
+
+            <div class="proj-card">
+              <div class="proj-name">Cinematic Environment Demo <span class="etag">UE5 · LUMEN</span></div>
+              <ul>
+                <li>Photorealistic forest scene with volumetric fog</li>
+                <li>Lumen GI &amp; dynamic shadow pipeline</li>
+                <li>Sequencer-driven cinematic flythrough camera</li>
+              </ul>
+            </div>
+
+            <div class="proj-card full">
+              <div class="proj-name">Third-Person Action Prototype <span class="etag">UE5 · BLUEPRINT</span></div>
+              <ul>
+                <li>Motion Warping &amp; IK for precise ledge-grab and vaulting locomotion</li>
+                <li>Combat system with combo chains, dodge roll &amp; stagger feedback</li>
+                <li>GAS-based attribute system managing health, stamina &amp; mana pools</li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Dev -->
+      <div class="exp-card amber">
+        <div class="exp-head">
+          <div>
+            <div class="exp-t">Mobile App Developer</div>
+            <div class="exp-co">Freelance / Learning Phase — Android &amp; iOS</div>
+          </div>
+          <div class="exp-badge">2021 — 2022</div>
+        </div>
+        <div class="exp-body">
+          <ul>
+            <li>Developed and deployed cross-platform applications targeting both Android (Java) and iOS (Swift).</li>
+            <li>Implemented Firebase Authentication, Firestore real-time database and Cloud Storage integrations.</li>
+            <li>Designed accessible, responsive UI layouts following Material Design and HIG guidelines.</li>
+          </ul>
+
+          <div class="proj-lbl">// Key Projects</div>
+          <div class="proj-grid">
+            <div class="proj-card">
+              <div class="proj-name">Task Manager App <span class="etag">ANDROID · iOS</span></div>
+              <ul>
+                <li>Smart reminders with AlarmManager &amp; UNNotification</li>
+                <li>Drag-to-reorder tasks with swipe-to-delete gesture</li>
+              </ul>
+            </div>
+            <div class="proj-card">
+              <div class="proj-name">Fitness Tracking App <span class="etag">FIREBASE · ANALYTICS</span></div>
+              <ul>
+                <li>Workout &amp; calorie tracker with progress charts</li>
+                <li>Firebase Analytics for retention &amp; session metrics</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EDUCATION -->
+    <div class="section">
+      <div class="sec-title">Education</div>
+      <div class="edu-box">
+        <div>
+          <div class="edu-deg">Bachelor of Business Administration (BBA)</div>
+          <div class="edu-sub">Undergraduate Degree — Completed</div>
+        </div>
+        <div class="edu-bdg">COMPLETED</div>
+      </div>
+    </div>
+
+  </div><!-- /main col -->
+
+  <!-- ── SIDEBAR ── -->
+  <div>
+
+    <!-- Game Engines -->
+    <div class="side-card">
+      <div class="sec-title" style="margin-bottom:14px">Game Engines</div>
+      <div class="skill-item">
+        <div class="skill-row"><span class="skill-name">Unity</span><span class="skill-lvl">Advanced</span></div>
+        <div class="dots">
+          <div class="d on"></div><div class="d on"></div><div class="d on"></div><div class="d on"></div><div class="d"></div>
+        </div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-row"><span class="skill-name">Unreal Engine 5</span><span class="skill-lvl">Intermediate</span></div>
+        <div class="dots">
+          <div class="d on"></div><div class="d on"></div><div class="d on"></div><div class="d"></div><div class="d"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Programming -->
+    <div class="side-card green">
+      <div class="sec-title" style="margin-bottom:14px">Programming</div>
+      <div class="skill-item">
+        <div class="skill-row"><span class="skill-name">C#</span><span class="skill-lvl">Expert</span></div>
+        <div class="dots" style="--c:var(--green)">
+          <div class="d on"></div><div class="d on"></div><div class="d on"></div><div class="d on"></div><div class="d on"></div>
+        </div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-row"><span class="skill-name">C++</span><span class="skill-lvl">Intermediate</span></div>
+        <div class="dots">
+          <div class="d on"></div><div class="d on"></div><div class="d on"></div><div class="d"></div><div class="d"></div>
+        </div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-row"><span class="skill-name">Java</span><span class="skill-lvl">Proficient</span></div>
+        <div class="dots">
+          <div class="d on"></div><div class="d on"></div><div class="d on"></div><div class="d on"></div><div class="d"></div>
+        </div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-row"><span class="skill-name">Swift</span><span class="skill-lvl">Familiar</span></div>
+        <div class="dots">
+          <div class="d on"></div><div class="d on"></div><div class="d"></div><div class="d"></div><div class="d"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Core Skills -->
+    <div class="side-card amber">
+      <div class="sec-title" style="margin-bottom:12px">Core Skills</div>
+      <div class="tag-cloud">
+        <span class="tag">Game Physics</span>
+        <span class="tag">AI / Behaviour Trees</span>
+        <span class="tag">Multiplayer (Photon)</span>
+        <span class="tag">UI / UX Systems</span>
+        <span class="tag">Shader Basics</span>
+        <span class="tag">Procedural Gen</span>
+        <span class="tag">Object Pooling</span>
+        <span class="tag">Monetization</span>
+        <span class="tag">Optimization</span>
+        <span class="tag">Git / Version Ctrl</span>
+        <span class="tag">Firebase</span>
+        <span class="tag">Blender (Basic)</span>
+        <span class="tag">Cinemachine</span>
+        <span class="tag">GAS (UE5)</span>
+      </div>
+    </div>
+
+    <!-- Languages -->
+    <div class="side-card">
+      <div class="sec-title" style="margin-bottom:14px">Languages</div>
+      <div class="lang-item">
+        <div class="lang-row">English<span class="lang-lv">Professional</span></div>
+        <div class="lang-bar"><div class="lang-fill" style="width:82%"></div></div>
+      </div>
+      <div class="lang-item" style="margin-bottom:0">
+        <div class="lang-row">Hindi<span class="lang-lv">Native</span></div>
+        <div class="lang-bar"><div class="lang-fill" style="width:100%"></div></div>
+      </div>
+    </div>
+
+    <!-- Additional -->
+    <div class="side-card green">
+      <div class="sec-title" style="margin-bottom:12px">About</div>
+      <ul class="add-list">
+        <li>Deeply passionate about game development and interactive storytelling.</li>
+        <li>Continuously exploring advanced systems — shaders, procedural generation, and netcode.</li>
+        <li>Focused on building scalable, monetizable, and globally publishable games.</li>
+        <li>Quick learner who adapts across Unity, Unreal and mobile stacks.</li>
+      </ul>
+    </div>
+
+  </div><!-- /sidebar -->
+
+</div><!-- /columns -->
+
+<footer>
+  <em>SAHIL KUMAR</em> &nbsp;·&nbsp; Game Developer &nbsp;·&nbsp; sahilmaravi123@gmail.com &nbsp;·&nbsp; +91-7539902010
+</footer>
+
+</div><!-- /wrap -->
+</body>
+</html>
